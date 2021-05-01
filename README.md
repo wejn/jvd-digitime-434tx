@@ -1,7 +1,7 @@
 # Transmitter for "JVD Digi Clock" (434 MHz)
 
 This repository hosts a transmitter that implements the "Philips-temperature"
-protocol used by our
+protocol used by our digi clock + thermometer combo:
 
 ![JVD Digi Clock](https://wejn.org/assets/2021-digiclock-upgrade/jvd-digi-clock.jpg)
 
