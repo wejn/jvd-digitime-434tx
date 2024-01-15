@@ -76,18 +76,25 @@ void tx434_task(void *pvParameters)
         ESP_LOGI(TAG, "Sending: %.01f", temp_to_send);
         led_on();
 
-        transmit_array(preamble_bits, 4);
-        transmit_array(preamble_bits, 4);
-        transmit_array(packet, PACKET_SIZE);
-        gap();
-        transmit_array(preamble_bits, 4);
-        transmit_array(packet, PACKET_SIZE);
-        gap();
-        transmit_array(preamble_bits, 4);
-        transmit_array(packet, PACKET_SIZE);
+        for (int i = 3; i > 0; i--) {
+          transmit_array(preamble_bits, 4);
+          transmit_array(preamble_bits, 4);
+          transmit_array(packet, PACKET_SIZE);
+          gap();
+          transmit_array(preamble_bits, 4);
+          transmit_array(packet, PACKET_SIZE);
+          gap();
+          transmit_array(preamble_bits, 4);
+          transmit_array(packet, PACKET_SIZE);
+
+          gap();
+          gap();
+          gap();
+        }
 
         led_off();
         ESP_LOGI(TAG, "Going to sleep");
-        vTaskDelay(179 * 1000 / portTICK_PERIOD_MS);
+        vTaskDelay((178 * 1000 - 947*2 - 3*3*packet_gap) / portTICK_PERIOD_MS);
+        // adjusted the delay down by 2 more packet length and 3x 3-gap
     }
 }

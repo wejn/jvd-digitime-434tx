@@ -87,5 +87,12 @@ void app_main()
     app_wifi_initialise();
 
     xTaskCreate(&temp_client_task, "temp_client_task", 8192, NULL, 5, NULL);
+
+    int maxloop = 30;
+
+    while (maxloop > 0 && !temp_set) {
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
+        maxloop--;
+    }
     xTaskCreate(&tx434_task, "tx434_task", 8192, NULL, 20, NULL);
 }
